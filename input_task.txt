@@ -1,0 +1,7 @@
+# wcet_min wcet_max mem_total util_cpu util_target n_tasks
+#최소 수행시간, 최대 수행시간, 메모리 총 용량, 태스크의 개수
+# util_cpu는 cpu만의 utility이고
+# util_target은 cpu와 MEM을 합한 총 utility를 의미
+
+*gentask
+10 30 2000 0.4 0.9 10
