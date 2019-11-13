@@ -9,19 +9,27 @@ util_mem_1task = 0
 memreq_1task = 0
 n_mems = 2
 
-
+memreq_total = 0
+util_sum_cpu = 0
+memreq_total = 0
 
 class GenTask:
-
 
     def gen_task(a):
         global util_cpu_1task
         util_cpu_1task = Variables.util_cpu / Variables.n_tasks
         global util_mem_1task
-        util_mem_1task = GenTask.get_mem_util(1) / Variables.n_tasks;
-        print(util_mem_1task)
+        util_mem_1task = GenTask.get_mem_util() / Variables.n_tasks;
         global memreq_1task
         memreq_1task = Variables.mem_total * util_mem_1task
+
+
+
+        print(f'util_cpu_1task: {util_cpu_1task}')
+        print(f'util_mem_1task: {util_mem_1task}')
+        print(f'get_mem_util(): {GenTask.get_mem_util()}')
+        print(f'memreq_1task: {memreq_1task}')
+
         try:
             with open("task_generated.txt", "w", encoding='UTF8') as f:
                 for i in range(Variables.n_tasks):
@@ -36,26 +44,38 @@ class GenTask:
     def do_gen_task(input_file):
         global util_cpu_1task
         wcet = Variables.wcet_min + Nansu.get_rand(Variables.wcet_max - Variables.wcet_min)
-        duration = wcet / util_cpu_1task
-                   #+ (int)(Nansu.get_rand(wcet / util_cpu_1task/2)) - (int)(Nansu.get_rand(wcet / util_cpu_1task/2))
-        print(wcet, duration)
-        print(util_cpu_1task)
+        duration = wcet / util_cpu_1task + (int)(Nansu.get_rand(wcet / util_cpu_1task/2)) - (int)(Nansu.get_rand(wcet / util_cpu_1task/2))
+        global memreq_1task
+        memreq = memreq_1task + (int)(Nansu.get_rand(memreq_1task / 2))- (int)(Nansu.get_rand(memreq_1task / 2))
 
-        input_file.write(str(wcet))
+        mem_active_ratio = 0.1 + Nansu.get_rand(1000) / 10000.0 - Nansu.get_rand(1000) / 10000.0
+
+        global util_sum_cpu
+        util_sum_cpu += (wcet / duration)
+
+        global memreq_total
+        memreq_total += memreq
+
+        line = f'{wcet} {duration} {memreq} {mem_active_ratio}\n'
+        print(wcet, duration, memreq, mem_active_ratio)
+        print(f'util_sum_cpu: {util_sum_cpu}')
+        print(f'memreq_total: {memreq_total}')
+        input_file.write(line)
+
 
     @staticmethod
-    def get_mem_util(a):
+    def get_mem_util() -> float:
         global n_mems
         util_bymem = Variables.util_target - Variables.util_cpu
         util_mem = 1.0 / n_mems
-        while(1):
-            i=0
-            i = i+1
-            if(i < n_mems and util_bymem >0):
-                break
+
+        for i in range(1,int(n_mems)):
             util_overhead = 1 / Memories.mem_list[i].wcet_scale - 1
-            if(util_overhead<util_bymem):
+            if util_bymem <= 0:
+                break
+            if util_overhead < util_bymem:
                 util_bymem -= util_overhead
+
                 util_mem += 1.0 / n_mems
             else:
                 util_mem += 1.0 / n_mems * util_bymem / util_overhead

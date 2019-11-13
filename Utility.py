@@ -11,7 +11,7 @@ class Variables:
 class Nansu:
     @staticmethod
     def get_rand(max_value):
-        return random.randrange(max_value+1)
+        return random.randrange(int(max_value+1))
 
 class ErrorMsg:
     @staticmethod
