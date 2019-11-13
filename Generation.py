@@ -51,14 +51,13 @@ class GenTask:
         mem_active_ratio = 0.1 + Nansu.get_rand(1000) / 10000.0 - Nansu.get_rand(1000) / 10000.0
 
         global util_sum_cpu
-        util_sum_cpu += (wcet / duration)
+        util_sum_cpu += wcet / duration
 
         global memreq_total
         memreq_total += memreq
 
-        line = f'{wcet} {duration} {memreq} {mem_active_ratio}\n'
-        print(wcet, duration, memreq, mem_active_ratio)
-        print(f'util_sum_cpu: {util_sum_cpu}')
+        line = f'{wcet} {duration} {memreq} {format(mem_active_ratio,".8f")}\n'
+        print(f'util_sum_cpu: {format(util_sum_cpu,".8f")}')
         print(f'memreq_total: {memreq_total}')
         input_file.write(line)
 
