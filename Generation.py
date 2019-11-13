@@ -23,23 +23,29 @@ class GenTask:
         global memreq_1task
         memreq_1task = Variables.mem_total * util_mem_1task
 
+        print("=======================================================")
 
+        print(f'util_cpu_1task:{format(util_cpu_1task, ".4f")}')
+        print(f'util_mem_1task: {format(util_mem_1task, ".4f")}')
+        print(f'get_mem_util(): {format(GenTask.get_mem_util(),".3f")}')
+        print(f'memreq_1task: {format(memreq_1task, ".0f")}')
 
-        print(f'util_cpu_1task: {util_cpu_1task}')
-        print(f'util_mem_1task: {util_mem_1task}')
-        print(f'get_mem_util(): {GenTask.get_mem_util()}')
-        print(f'memreq_1task: {memreq_1task}')
+        print("=======================================================")
 
         try:
             with open("task_generated.txt", "w", encoding='UTF8') as f:
                 for i in range(Variables.n_tasks):
+                    print("--------------------------")
+                    print(f'Task Number: {i+1}')
                     GenTask.do_gen_task(f)
+                    print("--------------------------")
+
 
 
         except FileNotFoundError:
             ErrorMsg.error("cannot open task_generated.txt")
 
-        print(f'full power utilization: {util_sum_cpu + GenTask.get_util_overhead_bymem(memreq_total)}')
+        print(f'full power utilization: {format(util_sum_cpu + GenTask.get_util_overhead_bymem(memreq_total),".4f")}')
 
     @staticmethod
     def do_gen_task(input_file):
@@ -57,9 +63,10 @@ class GenTask:
         global memreq_total
         memreq_total += memreq
 
-        line = f'{wcet} {duration} {memreq} {format(mem_active_ratio,".8f")}\n'
-        print(f'util_sum_cpu: {format(util_sum_cpu,".8f")}')
-        print(f'memreq_total: {memreq_total}')
+        line = f'{wcet} {format(duration,".0f")} {format(memreq,".0f")} {format(mem_active_ratio,".4f")}\n'
+
+        print(f'util_sum_cpu: {format(util_sum_cpu,".4f")}')
+        print(f'memreq_total: {format(memreq_total,".0f")}')
         input_file.write(line)
 
 
