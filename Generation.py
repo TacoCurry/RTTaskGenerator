@@ -38,7 +38,8 @@ class GenTask:
 
         except FileNotFoundError:
             ErrorMsg.error("cannot open task_generated.txt")
-        #print(f'full power utilization: {GenTask.get_util_overhead_bymem(memreq_total)}')
+
+        print(f'full power utilization: {util_sum_cpu + GenTask.get_util_overhead_bymem(memreq_total)}')
 
     @staticmethod
     def do_gen_task(input_file):
