@@ -1,12 +1,16 @@
-20
-10 30 2000 0.5 0.8
+4
+10
+10 30 2000 0.5 0.9
 
+# n_cores
 # n_tasks
 # wcet_min wcet_max mem_total util_cpu util_target
 
 
 
+# 코어의 수
+# 태스크의 수
+# 최소 수행시간, 최대 수행시간, 메모리 총 용량
 
-#최소 수행시간, 최대 수행시간, 메모리 총 용량
 # util_cpu는 cpu만의 utility이고
 # util_target은 cpu와 MEM을 합한 총 utility를 의미

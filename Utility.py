@@ -1,6 +1,7 @@
 import random
 import sys
 class Variables:
+    n_cores = 0
     n_tasks =0
     wcet_min = 0
     wcet_max = 0

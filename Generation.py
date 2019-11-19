@@ -91,7 +91,6 @@ class GenTask:
                 break
             if util_overhead < util_bymem:
                 util_bymem -= util_overhead
-
                 util_mem += 1.0 / n_mems
             else:
                 util_mem += 1.0 / n_mems * util_bymem / util_overhead
