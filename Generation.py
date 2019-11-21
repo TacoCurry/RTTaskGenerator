@@ -18,16 +18,14 @@ class GenTask:
     def gen_task(a):
         global util_cpu_1task
         util_cpu_1task = Variables.util_cpu / Variables.n_tasks
-        global util_mem_1task
-        util_mem_1task = GenTask.get_mem_util() / Variables.n_tasks;
         global memreq_1task
-        memreq_1task = Variables.mem_total * util_mem_1task
+        memreq_1task = Variables.total_mem_usage / Variables.n_tasks
 
         print("=======================================================")
 
         print(f'util_cpu_1task:{format(util_cpu_1task, ".6f")}')
         print(f'util_mem_1task: {format(util_mem_1task, ".6f")}')
-        print(f'get_mem_util(): {format(GenTask.get_mem_util(),".6f")}')
+        # print(f'get_mem_util(): {format(GenTask.get_mem_util(),".6f")}')
         print(f'memreq_1task: {format(memreq_1task, ".0f")}')
 
         print("=======================================================")

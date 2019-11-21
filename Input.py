@@ -44,7 +44,7 @@ class InputUtils:
                 Variables.wcet_max=int(temp[1])
                 Variables.mem_total=int(temp[2])
                 Variables.util_cpu=float(temp[3])*Variables.n_cores
-                Variables.util_target=float(temp[4])
+                Variables.total_mem_usage=int(temp[4])
                 print("=======================================================")
                 print("This is the Task Generation Input")
 
@@ -52,7 +52,7 @@ class InputUtils:
                 print(Variables.n_cores ,Variables.n_tasks)
 
                 print("wcet_min, wcet_max, mem_total, util_cpu, util_target")
-                print( Variables.wcet_min, Variables.wcet_max, Variables.mem_total, Variables.util_cpu, Variables.util_target)
+                print( Variables.wcet_min, Variables.wcet_max, Variables.mem_total, Variables.util_cpu, Variables.total_mem_usage)
 
         except FileNotFoundError:
             ErrorMsg.error("task 정보 파일을 찾을 수 없습니다.")

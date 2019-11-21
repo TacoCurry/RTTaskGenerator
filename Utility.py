@@ -7,7 +7,8 @@ class Variables:
     wcet_max = 0
     mem_total = 0
     util_cpu = 0
-    util_target = 0
+    total_mem_usage = 0
+
 
 class Nansu:
     @staticmethod
