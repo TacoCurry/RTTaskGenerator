@@ -1,12 +1,10 @@
 4
 10
-10 30 2000 0.5 0.9
+10 30 2000 0.5 2000
 
 # n_cores
 # n_tasks
-# wcet_min wcet_max mem_total util_cpu util_target
-
-
+# wcet_min wcet_max mem_total util_cpu total_memory_usage
 
 # 코어의 수
 # 태스크의 수
