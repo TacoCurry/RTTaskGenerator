@@ -1,6 +1,0 @@
-dram  1000 1   0.1   0.1
-lpm 1000 0.7 0.01  0.01
-
-
-# type capacity, wcet_scale, power_active, power_idle
-# 메모리 종류, 메모리 용량, 수행시간 비율, active, idle일때 전력
